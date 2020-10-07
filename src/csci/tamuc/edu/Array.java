@@ -5,17 +5,17 @@ package csci.tamuc.edu;
  * @create 2020-10-05-2:40 PM
  */
 
-public class Array {
+public class Array<T> {
 
     private int size; //point to last avaiable empty space
-    private int[] data; //actual data storage
+    private T[] data; //actual data storage
 
     public Array() {
         this(10);
     }
 
     public Array(int capacity) {
-        data = new int[capacity];
+        data = (T[]) new Object[capacity];
     }
 
     public boolean isEmpty() {
@@ -30,13 +30,13 @@ public class Array {
         return data.length;
     }
 
-    public int get(int index) {// return the element in that data at index: index
+    public T get(int index) {// return the element in that data at index: index
         if(index < 0 || index >= size)
             throw new IllegalArgumentException("Invalid access, index out of range");
         return data[index];
     }
 
-    public void append(int val) {
+    public void append(T val) {
         insert(size, val);
 //        if(size == data.length)
 //            throw new IllegalArgumentException("Fails because array is full");
@@ -44,7 +44,7 @@ public class Array {
 //        data[size++] = val;
     }
 
-    public void insert(int index, int val) {
+    public void insert(int index, T val) {
         if(size == data.length)
             throw new IllegalArgumentException("Fails because array is full"); //todo: resize the data
 
@@ -61,60 +61,60 @@ public class Array {
         size++;
     }
 
-    public void set(int index, int val) {
+    public void set(int index, T val) {
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");
 
         data[index] = val;
     }
 
-    public boolean contains(int target) {
-        for(int e : data) {
-            if(e == target) return true;
+    public boolean contains(T target) {
+        for(T e : data) {
+            if(e.equals(target)) return true;
         }
 
         return false;
     }
 
     //find the index holds target
-    public int find(int target) {
+    public int find(T target) {
         for(int i = 0; i < size; i++) {
-            if(data[i] == target) return i;
+            if(data[i].equals(target)) return i;
         }
 
         return -1;
     }
 
-    public int removeLast() {
+    public T removeLast() {
         return delete(size - 1);
     }
 
-    public int removeFirst() {
+    public T removeFirst() {
         return delete(0);
     }
 
-    public void removeElement(int target) {
+    public void removeElement(T target) {
         for(int i = 0; i < size; i++) {
-            if (data[i] != target) continue;
+            if (!data[i].equals(target)) continue;
 
             delete(i);
             break;
         }
     }
 
-    public void removeAll(int target) {
+    public void removeAll(T target) {
         for(int i = 0; i < size; i++) {
-            if (data[i] != target) continue;
+            if (!data[i].equals(target)) continue;
 
             delete(i);
         }
     }
 
-    public int delete(int index) {
+    public T delete(int index) {
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");
 
-        int ret = data[index];
+        T ret = data[index];
 
         //copy [index + 1, size - 1]
         for(int i = index + 1; i < size; i++) {
@@ -128,7 +128,7 @@ public class Array {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Current size: " + size + ", capacity: " + data.length + "\n[");
-        for(int e : data) {
+        for(T e : data) {
             sb.append(e + " ");
         }
         sb.append("]");

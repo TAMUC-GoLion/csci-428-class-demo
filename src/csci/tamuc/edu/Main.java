@@ -10,10 +10,10 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Array a = new Array(20);
+        Array<Character> a = new Array<>(20);
 
         for(int i = 1; i <= 8; i++) {
-            a.append(i);
+            a.append((char)(65 + i));
         }
 
         System.out.println(a.toString());
@@ -29,13 +29,13 @@ public class Main {
 //            System.out.println("remove last: " + a.removeLast());
 //        }
 
-        a.append(3);
-        a.append(-2);
-        a.append(3);
-        a.removeElement(3);
+        a.append((char)68);
+        a.append((char)63);
+        a.append((char)68);
+        a.removeElement((char)68);
         System.out.println(a.toString());
 
-        a.removeAll(3);
+        a.removeAll('D');
         System.out.println(a.toString());
     }
 }
