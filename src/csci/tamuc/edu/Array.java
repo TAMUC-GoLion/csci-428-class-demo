@@ -1,5 +1,7 @@
 package csci.tamuc.edu;
 
+import java.util.Objects;
+
 /**
  * @author ruby_
  * @create 2020-10-05-2:40 PM
@@ -45,11 +47,10 @@ public class Array<E> {//generic type java 1.5
     }
 
     public void insert(int index, E val) {
-        if(size == data.length)
-            throw new IllegalArgumentException("Fails because array is full"); //todo: resize the data
-
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");
+
+        if(size == getCapacity()) resize(size * 2);
 
         //copy all elements in [index, size - 1] >> 1
         for(int i = size - 1; i >= index; i--) {
@@ -59,6 +60,20 @@ public class Array<E> {//generic type java 1.5
         //modify index
         data[index] = val;
         size++;
+    }
+
+    private void resize(int newCap) {
+        //1) create a newData to hold
+        E[] newData = (E[]) new Object[newCap];
+
+        //2) copy original data to this new Data
+//        for(int i = 0; i < size; i++) {
+//            newData[i] = data[i];
+//        }
+        System.arraycopy(data, 0, newData, 0, size);
+
+        //3) point data reference to newData
+        data = newData;
     }
 
     public void set(int index, E val) {
@@ -96,7 +111,13 @@ public class Array<E> {//generic type java 1.5
             data[i - 1] = data[i];
         }
 
-        size--;
+//        size--;
+        data[--size] = null;
+
+        if(size < data.length / 4  &&  data.length / 2 != 0) {
+            resize(data.length / 2); //lazy mode
+        }
+
         return ret;
     }
 
