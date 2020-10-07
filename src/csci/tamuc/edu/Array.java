@@ -93,6 +93,23 @@ public class Array {
         return delete(0);
     }
 
+    public void removeElement(int target) {
+        for(int i = 0; i < size; i++) {
+            if (data[i] != target) continue;
+
+            delete(i);
+            break;
+        }
+    }
+
+    public void removeAll(int target) {
+        for(int i = 0; i < size; i++) {
+            if (data[i] != target) continue;
+
+            delete(i);
+        }
+    }
+
     public int delete(int index) {
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");

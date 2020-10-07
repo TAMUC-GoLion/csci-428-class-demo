@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Array a = new Array();
+        Array a = new Array(20);
 
         for(int i = 1; i <= 8; i++) {
             a.append(i);
@@ -19,14 +19,23 @@ public class Main {
         System.out.println(a.toString());
 //        System.out.println(a.contains(-1));
 //        System.out.println(a.contains(5));
-        System.out.println(a.find(6));
-        System.out.println(a.find(0));
+//        System.out.println(a.find(6));
+//        System.out.println(a.find(0));
+//
+//        a.removeFirst();
+//        System.out.println("remove first: " + a.toString());
+//
+//        while(!a.isEmpty()) {
+//            System.out.println("remove last: " + a.removeLast());
+//        }
 
-        a.removeFirst();
-        System.out.println("remove first: " + a.toString());
+        a.append(3);
+        a.append(-2);
+        a.append(3);
+        a.removeElement(3);
+        System.out.println(a.toString());
 
-        while(!a.isEmpty()) {
-            System.out.println("remove last: " + a.removeLast());
-        }
+        a.removeAll(3);
+        System.out.println(a.toString());
     }
 }
