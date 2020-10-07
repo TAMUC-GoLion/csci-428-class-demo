@@ -120,7 +120,8 @@ public class Array<T> {
         for(int i = index + 1; i < size; i++) {
             data[i - 1] = data[i];
         }
-        size--;
+//        size--;
+        data[--size] = null;
         return ret;
     }
 
