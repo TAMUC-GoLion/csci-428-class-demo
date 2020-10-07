@@ -100,6 +100,33 @@ public class Array {
         return ret;
     }
 
+    public int removeLast() {
+        return delete(size - 1);
+    }
+
+    public int removeFirst() {
+        return delete(0);
+    }
+
+    //remove the first find target
+    public void removeElement(int target) {
+        for(int i = 0; i < size; i++) {
+            if(data[i] != target) continue;
+
+            delete(i);
+            break;
+        }
+    }
+
+    //remove all values that's equal to target
+    public void removeAll(int target) {
+        for(int i = 0; i < size; i++) {
+            if(data[i] != target) continue;
+
+            delete(i);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

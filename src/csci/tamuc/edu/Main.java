@@ -22,7 +22,22 @@ public class Main {
 //        System.out.println(a.find(6));
 //        System.out.println(a.find(0));
 
-        a.delete(3);
+        a.removeFirst();
+        a.append(3);
+        a.append(-1);
+        a.append(3);
         System.out.println(a.toString());
+
+        a.removeElement(3);
+        System.out.println(a.toString());
+
+        a.removeAll(3);
+        System.out.println(a.toString());
+//        a.delete(3);
+//        System.out.println(a.toString());
+//
+//        while(!a.isEmpty()) {
+//            System.out.println(a.removeFirst());
+//        }
     }
 }
