@@ -92,10 +92,10 @@ public class Array {
         int ret = data[index];
 
         //copy [index + 1, size - 1]
-        for(int i = index + 1; i < size - 1; i++) {
+        for(int i = index + 1; i < size; i++) {
             data[i - 1] = data[i];
         }
-
+        size--;
         return ret;
     }
 
