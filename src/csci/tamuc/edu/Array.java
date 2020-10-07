@@ -45,12 +45,10 @@ public class Array<T> {
     }
 
     public void insert(int index, T val) {
-        if(size == data.length)
-            throw new IllegalArgumentException("Fails because array is full"); //todo: resize the data
-
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");
 
+        if(size == getCapacity()) resize(size * 2);
         //copy all elements in [index, size - 1] >> 1
         for(int i = size - 1; i >= index; i--) {
             data[i + 1] = data[i];
@@ -59,6 +57,19 @@ public class Array<T> {
         //modify index
         data[index] = val;
         size++;
+    }
+
+    private void resize(int nextCap) {
+        //1. create a double sized newarray
+        T[] newArray = (T[]) new Object[nextCap];
+
+        //2. copy existing to newarray
+        for(int i = 0; i < size; i++) {
+            newArray[i] = data[i];
+        }
+
+        //3. change references
+        data = newArray;
     }
 
     public void set(int index, T val) {
@@ -122,6 +133,8 @@ public class Array<T> {
         }
 //        size--;
         data[--size] = null;
+
+        if(size == data.length / 4 && size / 2 != 0) resize(data.length / 2);
         return ret;
     }
 
