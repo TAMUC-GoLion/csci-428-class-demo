@@ -85,6 +85,14 @@ public class Array {
         return -1;
     }
 
+    public int removeLast() {
+        return delete(size - 1);
+    }
+
+    public int removeFirst() {
+        return delete(0);
+    }
+
     public int delete(int index) {
         if(index < 0 || index > size)
             throw new IllegalArgumentException("Invalid access, index out of range");

@@ -21,5 +21,12 @@ public class Main {
 //        System.out.println(a.contains(5));
         System.out.println(a.find(6));
         System.out.println(a.find(0));
+
+        a.removeFirst();
+        System.out.println("remove first: " + a.toString());
+
+        while(!a.isEmpty()) {
+            System.out.println("remove last: " + a.removeLast());
+        }
     }
 }
