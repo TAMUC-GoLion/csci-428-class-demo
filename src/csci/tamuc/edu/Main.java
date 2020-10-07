@@ -19,7 +19,10 @@ public class Main {
         System.out.println(a.toString());
 //        System.out.println(a.contains(-1));
 //        System.out.println(a.contains(5));
-        System.out.println(a.find(6));
-        System.out.println(a.find(0));
+//        System.out.println(a.find(6));
+//        System.out.println(a.find(0));
+
+        a.delete(3);
+        System.out.println(a.toString());
     }
 }
