@@ -64,9 +64,10 @@ public class Array<T> {
         T[] newArray = (T[]) new Object[nextCap];
 
         //2. copy existing to newarray
-        for(int i = 0; i < size; i++) {
-            newArray[i] = data[i];
-        }
+//        for(int i = 0; i < size; i++) {
+//            newArray[i] = data[i];
+//        }
+        System.arraycopy(data, 0, newArray, 0, size);
 
         //3. change references
         data = newArray;

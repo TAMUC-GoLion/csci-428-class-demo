@@ -12,17 +12,20 @@ public class Main {
     public static void main(String[] args) {
         Array<Integer> a = new Array<>();
 
-        for(int i = 1; i <= 8; i++) {
+        long start = System.currentTimeMillis();
+        for(int i = 1; i <= 30000000; i++) {
 //            a.append((char)(65 + i));
             a.append(i);
         }
+        long elapsed = System.currentTimeMillis() - start;
+        System.out.println("Grow to size: " + a.size() + " for " + elapsed + " ms");
 
-        System.out.println(a.toString());
-
-        a.append(-9);
-        a.append(-90);
-        a.append(-900);
-        System.out.println(a.toString());
+//        System.out.println(a.toString());
+//
+//        a.append(-9);
+//        a.append(-90);
+//        a.append(-900);
+//        System.out.println(a.toString());
 
 //        System.out.println(a.contains(-1));
 //        System.out.println(a.contains(5));
