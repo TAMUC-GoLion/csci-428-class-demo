@@ -1,6 +1,6 @@
 package csci.tamuc.edu;
 
-import java.util.Arrays;
+import csci.tamuc.edu.common.Array;
 
 /**
  * @author ruby_
