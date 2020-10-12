@@ -1,5 +1,6 @@
 package csci.tamuc.edu;
 
+import csci.tamuc.edu.algo.QuickSelect;
 import csci.tamuc.edu.algo.QuickSort;
 import csci.tamuc.edu.common.Array;
 
@@ -14,11 +15,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] a = {2, 5, -1, 4, 2, 3};
-        QuickSort qs = new QuickSort();
-        qs.sort(a);
+        int[] a = {2, 5, -1, 4, 2, 3}; //3rd biggest element nlog(n) quick sort
 
+        new QuickSort().sort(a);
         System.out.println(Arrays.toString(a));
+        System.out.println(new QuickSelect().kthLargest(a, 2));
+        System.out.println(new QuickSelect().kthLargest(a, 4));
+
+//        QuickSort qs = new QuickSort();
+//        qs.sort(a);
+//
+//        System.out.println(Arrays.toString(a));
 
 //        Array<Integer> a = new Array<>();
 //
