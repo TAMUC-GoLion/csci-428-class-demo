@@ -17,11 +17,11 @@ public class Main {
 
         int[] a = {2, 5, -1, 4, 2, 3}; //3rd biggest element nlog(n) quick sort
 
-        new QuickSort().sort(a);
-        System.out.println(Arrays.toString(a));
         System.out.println(new QuickSelect().kthLargest(a, 2));
         System.out.println(new QuickSelect().kthLargest(a, 6));
 
+        new QuickSort().sort(a);
+        System.out.println(Arrays.toString(a));
 //        QuickSort qs = new QuickSort();
 //        qs.sort(a);
 //
