@@ -27,8 +27,8 @@ public class QuickSelect {
         }
 
         //[start, r] (pivot) [l, end]
-        if(start <= r && k <= r) quickSelect(arr, start, r, k);
-        if(l <= end && k >= l) quickSelect(arr, l, end, k);
+        if(start <= r && k <= r) return quickSelect(arr, start, r, k);
+        if(l <= end && k >= l) return quickSelect(arr, l, end, k);
         return pivot;
     }
 

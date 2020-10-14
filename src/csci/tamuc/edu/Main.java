@@ -20,7 +20,7 @@ public class Main {
         new QuickSort().sort(a);
         System.out.println(Arrays.toString(a));
         System.out.println(new QuickSelect().kthLargest(a, 2));
-        System.out.println(new QuickSelect().kthLargest(a, 4));
+        System.out.println(new QuickSelect().kthLargest(a, 6));
 
 //        QuickSort qs = new QuickSort();
 //        qs.sort(a);
