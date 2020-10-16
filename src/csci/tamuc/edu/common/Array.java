@@ -38,12 +38,24 @@ public class Array<E> {//generic type java 1.5
         return data[index];
     }
 
+    public void appendFirst(E val) {
+        insert(0, val);//o(n)
+    }
+
     public void append(E val) {
-        insert(size, val);
+        insert(size, val); //o(1)
 //        if(size == data.length)
 //            throw new IllegalArgumentException("Fails because array is full");
 //
 //        data[size++] = val;
+    }
+
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public E getFirst() {
+        return get(0);
     }
 
     public void insert(int index, E val) {

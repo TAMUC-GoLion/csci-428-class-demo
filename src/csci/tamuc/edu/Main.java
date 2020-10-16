@@ -1,7 +1,10 @@
 package csci.tamuc.edu;
 
+import csci.tamuc.edu.algo.MergeSort;
 import csci.tamuc.edu.algo.QuickSelect;
 import csci.tamuc.edu.algo.QuickSort;
+import csci.tamuc.edu.api.Stack;
+import csci.tamuc.edu.common.AStack;
 import csci.tamuc.edu.common.Array;
 
 import java.util.Arrays;
@@ -17,11 +20,21 @@ public class Main {
 
         int[] a = {2, 5, -1, 4, 2, 3}; //3rd biggest element nlog(n) quick sort
 
-        System.out.println(new QuickSelect().kthLargest(a, 2));
-        System.out.println(new QuickSelect().kthLargest(a, 6));
+        Stack<Integer> stack = new AStack<>();
+        for(int e : a) stack.push(e);
 
-        new QuickSort().sort(a);
-        System.out.println(Arrays.toString(a));
+        System.out.println(stack.toString());
+
+        System.out.println(stack.pop());
+        System.out.println(stack.toString());
+
+//        new MergeSort().sort(a);
+//        System.out.println(Arrays.toString(a));
+//        System.out.println(new QuickSelect().kthLargest(a, 2));
+//        System.out.println(new QuickSelect().kthLargest(a, 6));
+//
+//        new QuickSort().sort(a);
+//        System.out.println(Arrays.toString(a));
 //        QuickSort qs = new QuickSort();
 //        qs.sort(a);
 //
