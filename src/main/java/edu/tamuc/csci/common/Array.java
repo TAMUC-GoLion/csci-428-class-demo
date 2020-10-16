@@ -1,6 +1,4 @@
-package csci.tamuc.edu.common;
-
-import java.util.Objects;
+package edu.tamuc.csci.common;
 
 /**
  * @author ruby_

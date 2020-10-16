@@ -1,4 +1,4 @@
-package csci.tamuc.edu.common;
+package edu.tamuc.csci.common;
 
 /**
  * @author ruby_

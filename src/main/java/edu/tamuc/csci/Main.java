@@ -1,13 +1,7 @@
-package csci.tamuc.edu;
+package edu.tamuc.csci;
 
-import csci.tamuc.edu.algo.MergeSort;
-import csci.tamuc.edu.algo.QuickSelect;
-import csci.tamuc.edu.algo.QuickSort;
-import csci.tamuc.edu.api.Stack;
-import csci.tamuc.edu.common.AStack;
-import csci.tamuc.edu.common.Array;
-
-import java.util.Arrays;
+import edu.tamuc.csci.api.Stack;
+import edu.tamuc.csci.common.AStack;
 
 /**
  * @author ruby_

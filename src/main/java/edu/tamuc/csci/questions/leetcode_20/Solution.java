@@ -1,4 +1,4 @@
-package csci.tamuc.edu.questions.leetcode_20;
+package edu.tamuc.csci.questions.leetcode_20;
 
 import java.util.Stack;
 

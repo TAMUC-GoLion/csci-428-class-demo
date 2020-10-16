@@ -1,4 +1,4 @@
-package csci.tamuc.edu.algo;
+package edu.tamuc.csci.algo;
 
 /**
  * @author ruby_

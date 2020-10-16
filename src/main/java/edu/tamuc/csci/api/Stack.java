@@ -1,4 +1,4 @@
-package csci.tamuc.edu.api;
+package edu.tamuc.csci.api;
 
 public interface Stack<E> {
     int size();//return the size of stack, the number of the stored elements

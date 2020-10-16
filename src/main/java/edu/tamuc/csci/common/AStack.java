@@ -1,7 +1,6 @@
-package csci.tamuc.edu.common;
+package edu.tamuc.csci.common;
 
-
-import csci.tamuc.edu.api.Stack;
+import edu.tamuc.csci.api.Stack;
 
 /**
  * @author ruby_

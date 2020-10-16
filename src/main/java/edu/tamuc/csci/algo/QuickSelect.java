@@ -1,6 +1,6 @@
-package csci.tamuc.edu.algo;
+package edu.tamuc.csci.algo;
 
-import csci.tamuc.edu.common.Util;
+import edu.tamuc.csci.common.Util;
 
 /**
  * @author ruby_
