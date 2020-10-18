@@ -17,6 +17,13 @@ public class MinHeap<E extends Comparable<E>> {
         data = new Array<>(10);
     }
 
+    public MinHeap(E[] arr) {
+        data = new Array<>(arr);
+        for(int i = parent(arr.length - 1); i >= 0; i--) {
+            heapifyDown(i);
+        }
+    }
+
     public int size() {
         return data.size();
     }

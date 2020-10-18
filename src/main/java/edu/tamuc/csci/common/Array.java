@@ -1,5 +1,7 @@
 package edu.tamuc.csci.common;
 
+import java.util.Arrays;
+
 /**
  * @author ruby_
  * @create 2020-10-05-2:40 PM
@@ -16,6 +18,11 @@ public class Array<E> {//generic type java 1.5
 
     public Array(int capacity) {
         data = (E[]) new Object[capacity];
+    }
+
+    public Array(E[] arr) {
+        data = Arrays.copyOf(arr, arr.length);
+        size = data.length;
     }
 
     public boolean isEmpty() {

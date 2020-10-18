@@ -1,7 +1,9 @@
 package edu.tamuc.csci.common;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +12,27 @@ class MinHeapTest {
     private static final int TOTAL_ELEMENTS = 1000000;
 
     @Test
+    @DisplayName("Test 2")
+    void heapifyTest() {
+        Random random = new Random();
+
+        final int len = 100;
+        int[] arr = new int[len];
+        for(int i = 0; i < len; i++) {
+            arr[i] = random.nextInt(Integer.MAX_VALUE);
+        }
+
+        MinHeap<Integer> heap = new MinHeap<>(Arrays.stream(arr).boxed().toArray(Integer[]::new));
+        int pre = Integer.MIN_VALUE;
+        while(!heap.isEmpty()) {
+            int cur = heap.extractMin();
+            assertTrue(cur >= pre);
+            pre = cur;
+        }
+    }
+
+    @Test
+    @DisplayName("Test 1")
     void add() {
         MinHeap<Integer> heap = new MinHeap<>();
         Random random = new Random();
