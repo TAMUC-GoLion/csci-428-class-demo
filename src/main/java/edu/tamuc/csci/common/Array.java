@@ -168,4 +168,10 @@ public class Array<E> {//generic type java 1.5
         sb.append("]");
         return sb.toString();
     }
+
+    public void swap(int i, int j) {
+        E tmp = data[i];
+        data[i] = data[j];
+        data[j] = tmp;
+    }
 }
