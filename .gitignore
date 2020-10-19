@@ -38,4 +38,3 @@ doc
 out/
 classes/
 src/main/resources/
-!/src/main/java/csci/tamuc/edu/algo/MergeSort.java
