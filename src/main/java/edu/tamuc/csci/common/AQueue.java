@@ -4,14 +4,20 @@ import edu.tamuc.csci.api.Queue;
 
 /**
  * @author ruby_
- * @create 2020-10-16-4:17 PM
+ * @create 2020-10-19-2:49 PM
  */
 
 public class AQueue<E> implements Queue<E> {
-    Array<E> data;
 
-    public AQueue() {data = new Array<>();}
-    public AQueue(int capacity) { data = new Array<>(capacity);}
+    Array<E> data; //head would always be 0, tail would always be size() - 1
+
+    public AQueue(int capacity) {
+        data = new Array<>(capacity);
+    }
+
+    public AQueue() {
+        data = new Array<>();
+    }
 
     @Override
     public int size() {
@@ -41,12 +47,12 @@ public class AQueue<E> implements Queue<E> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Queue: head --> [");
-        for(int i = 0; i < size(); i++) {
+        sb.append("Array Queue, head -> [");
+        for(int i = 0; i < data.size(); i++) {
             sb.append(data.get(i));
             if(i != size() - 1) sb.append(",");
         }
-        sb.append("] <-- tail");
+        sb.append("] <- tail");
         return sb.toString();
     }
 }

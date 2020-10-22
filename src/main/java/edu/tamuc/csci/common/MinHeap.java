@@ -9,12 +9,8 @@ public class MinHeap<E extends Comparable<E>> {
 
     Array<E> data;
 
-    public MinHeap() {
-        this(10);
-    }
-
-    public MinHeap(int cap) {
-        data = new Array<>(10);
+    public MinHeap (int capacity) {
+        data = new Array<>(capacity);
     }
 
     public MinHeap(E[] arr) {
@@ -33,7 +29,7 @@ public class MinHeap<E extends Comparable<E>> {
     }
 
     private int parent(int index) {
-        if (index == 0) return -1;
+        if(index == 0) return -1;
         return (index - 1) / 2;
     }
 
@@ -45,16 +41,9 @@ public class MinHeap<E extends Comparable<E>> {
         return 2 * index + 2;
     }
 
-    /**
-     * Add element
-     *
-     * @param val
-     */
-    public void add(E val) {
+    public void offer(E val) {
         data.append(val);
-
-        int i = data.size() - 1;
-        heapifyUp(i);
+        heapifyUp(size() - 1);
     }
 
     private void heapifyUp(int i) {
@@ -64,39 +53,30 @@ public class MinHeap<E extends Comparable<E>> {
         }
     }
 
+    public E poll() {
+        if(isEmpty()) throw new IllegalArgumentException("Heap is empty");
+
+        data.swap(0, size() - 1);
+        E ret = data.removeLast();
+        heapifyDown(0);
+
+        return ret;
+    }
+
     private void heapifyDown(int i) {
         while(lChild(i) < size()) {
             int minChild = lChild(i);
             if(rChild(i) < size() && data.get(rChild(i)).compareTo(data.get(minChild)) < 0) minChild = rChild(i);
 
-            if(data.get(i).compareTo(data.get(minChild)) < 0) return;
+            if(data.get(i).compareTo(data.get(minChild)) <= 0) return;
 
             data.swap(i, minChild);
             i = minChild;
         }
     }
 
-    /**
-     * Extract the min value
-     *
-     * @return
-     */
-    public E extractMin() {
-        if (isEmpty()) throw new IllegalArgumentException("Heap is empty");
-        data.swap(0, data.size() - 1);
-        E ret = data.removeLast();
-        heapifyDown(0);
-        return ret;
-    }
-
     public E peek() {
-        if (isEmpty()) return null;
-
-        return data.getFirst();
-    }
-
-    @Override
-    public String toString() {
-        return data.toString();
+        if(isEmpty()) throw new IllegalArgumentException("Error: heap is empty");
+        return data.get(0);
     }
 }

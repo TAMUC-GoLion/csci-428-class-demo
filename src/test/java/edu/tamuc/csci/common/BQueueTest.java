@@ -7,17 +7,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class BQueueTest {
 
     @Test
-    public void test() {
+    void offer() {
         BQueue<Integer> que = new BQueue<>(3);
-        for (int i = 0; i < 5; i++) {
+        for(int i = 3; i <=10; i++) {
             que.offer(i);
-            System.out.println(que.toString());
-        }
-
-        while(!que.isEmpty()) {
-            que.poll();
             System.out.println(que.toString());
         }
     }
 
+    @Test
+    void poll() {
+        BQueue<Integer> que = new BQueue<>(3);
+        for(int i = 3; i <=10; i++) {
+            que.offer(i);
+            System.out.println(que.toString());
+        }
+
+        while (!que.isEmpty()) {
+            que.poll();
+            System.out.println(que.toString());
+        }
+    }
 }
