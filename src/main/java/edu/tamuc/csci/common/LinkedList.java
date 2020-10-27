@@ -27,19 +27,66 @@ public class LinkedList<E> implements Queue<E> {
     }
 
     public void add(int index, E val) {
-        if(index < 0 || index > size) throw new IllegalArgumentException("Error: Index out of boarder");
+        if(index < 0 || index > size) throw new IllegalArgumentException("Error: illegal index");
 
         if(index == 0) linkFirst(val);
         else {
-            Node<E> pre = head;
-            for(int i = 0; i < index - 1; i++) pre = pre.next;
-
+            Node<E> pre = node(index - 1);
 //            Node<E> newNode = new Node<>(val, pre.next);
 //            pre.next = newNode;
             pre.next = new Node<>(val, pre.next);
 
             size++;
         }
+    }
+
+    public E remove(int index) {
+        if(index < 0 || index >= size) throw new IllegalArgumentException("Error: Index out of boarder");
+        return index == 0 ? poll() : unlink(index);
+    }
+
+    private E unlink(int index) {
+        final Node<E> pre = node(index - 1);
+        final Node<E> delete = pre.next;
+
+        final Node<E> next = delete.next;
+        final E ret = delete.val;
+
+        pre.next = next;
+
+        delete.val = null;
+        delete.next = null;
+
+        size--;
+        return ret;
+    }
+
+    public E get(int index) {
+        final Node<E> node = node(index);
+        return node.val;
+    }
+
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public boolean contains(E val) {
+        Node<E> cur = head;
+        while(cur != null) {
+            if(cur.val.equals(val)) return true;
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    private Node<E> node(int index) {
+        if(index < 0 || index >= size) throw new IllegalArgumentException("Error: Index out of boarder");
+
+        Node<E> cur = head;
+        for(int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur;
     }
 
     @Override
@@ -93,8 +140,8 @@ public class LinkedList<E> implements Queue<E> {
         Node<E> cur = head;
         while(cur != null) {
             sb.append(cur.toString());
-            if(cur.next != null) sb.append("->");
             cur = cur.next;
+            if(cur != null) sb.append("->");
         }
         sb.append("]");
         return sb.toString();
