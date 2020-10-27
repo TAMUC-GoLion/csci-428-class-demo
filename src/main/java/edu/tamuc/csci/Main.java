@@ -30,15 +30,19 @@ public class Main {
     // java reflection (advanced)
     public static void main(String[] args) {
 
-        List<Integer> arr = new ArrayList<>();
+        List<Integer> alist_default = new ArrayList<>();
 
+        List<Integer> alist_zero = new ArrayList<>(0);
+        List<Integer> alist_collection = new ArrayList<>(alist_zero);
 
-        List<Integer> emptyArry0 = new ArrayList<>(0);
-        List<Integer> emptyArry = new ArrayList<>(emptyArry0);
+        System.out.println(alist_default == alist_collection);
+        System.out.println(alist_default.equals(alist_collection));
+        System.out.println(alist_collection == alist_zero);
+        System.out.println(alist_collection.equals(alist_zero));
 
-        System.out.println(emptyArry0.hashCode());
-        System.out.println(emptyArry.hashCode());
-        System.out.println(arr.hashCode());
+        System.out.println(alist_zero);
+        System.out.println(alist_collection);
+        System.out.println(alist_default);
 
 //        long start = System.currentTimeMillis();
 //        Random random = new Random();
