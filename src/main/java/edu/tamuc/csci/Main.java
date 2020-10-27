@@ -3,6 +3,10 @@ package edu.tamuc.csci;
 import edu.tamuc.csci.api.Stack;
 import edu.tamuc.csci.common.AStack;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * @author ruby_
  * @create 2020-10-05-2:57 PM
@@ -10,17 +14,49 @@ import edu.tamuc.csci.common.AStack;
 
 public class Main {
 
+    //API: application programming interface
+    public static String toString(List<Integer> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("List: [");
+        for(int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i));
+            if(i != list.size() - 1) sb.append(",");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    // java marker /tag interface
+    // java reflection (advanced)
     public static void main(String[] args) {
 
-        int[] a = {2, 5, -1, 4, 2, 3}; //3rd biggest element nlog(n) quick sort
+        List<Integer> arr = new ArrayList<>();
 
-        Stack<Integer> stack = new AStack<>();
-        for(int e : a) stack.push(e);
 
-        System.out.println(stack.toString());
+        List<Integer> emptyArry0 = new ArrayList<>(0);
+        List<Integer> emptyArry = new ArrayList<>(emptyArry0);
 
-        System.out.println(stack.pop());
-        System.out.println(stack.toString());
+        System.out.println(emptyArry0.hashCode());
+        System.out.println(emptyArry.hashCode());
+        System.out.println(arr.hashCode());
+
+//        long start = System.currentTimeMillis();
+//        Random random = new Random();
+//        for(int i = 0; i < 1000000; i++) {
+//            arr.add(random.nextInt(Integer.MAX_VALUE));
+//        }
+//
+//        long elapsed = System.currentTimeMillis() - start;
+//        System.out.println("Adding 1000000 values to ArrayList takes " + elapsed + " ms");
+//        int[] a = {2, 5, -1, 4, 2, 3}; //3rd biggest element nlog(n) quick sort
+//
+//        Stack<Integer> stack = new AStack<>();
+//        for(int e : a) stack.push(e);
+//
+//        System.out.println(stack.toString());
+//
+//        System.out.println(stack.pop());
+//        System.out.println(stack.toString());
 
 //        new MergeSort().sort(a);
 //        System.out.println(Arrays.toString(a));

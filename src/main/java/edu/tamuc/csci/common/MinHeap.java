@@ -30,7 +30,7 @@ public class MinHeap<E extends Comparable<E>> {
 
     private int parent(int index) {
         if(index == 0) return -1;
-        return (index - 1) / 2;
+        return (index - 1) / 2; // (data.len - 2) / 2 ==> data.len / 2 - 1
     }
 
     private int lChild(int index) {
