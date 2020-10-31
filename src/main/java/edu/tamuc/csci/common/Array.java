@@ -1,6 +1,7 @@
 package edu.tamuc.csci.common;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @author ruby_
@@ -38,9 +39,13 @@ public class Array<E> {//generic type java 1.5
     }
 
     public E get(int index) {// return the element in that data at index: index
+        rangeCheck(index);
+        return data[index];
+    }
+
+    private void rangeCheck(int index) {
         if(index < 0 || index >= size)
             throw new IllegalArgumentException("Invalid access, index out of range");
-        return data[index];
     }
 
     public void appendFirst(E val) {
@@ -64,8 +69,7 @@ public class Array<E> {//generic type java 1.5
     }
 
     public void insert(int index, E val) {
-        if(index < 0 || index > size)
-            throw new IllegalArgumentException("Invalid access, index out of range");
+        rangeCheckInsert(index);
 
         if(size == getCapacity()) resize(size * 2);
 
@@ -77,6 +81,11 @@ public class Array<E> {//generic type java 1.5
         //modify index
         data[index] = val;
         size++;
+    }
+
+    private void rangeCheckInsert(int index) {
+        if(index < 0 || index > size)
+            throw new IllegalArgumentException("Failed to insert, index out of range");
     }
 
     private void resize(int newCap) {
@@ -94,8 +103,7 @@ public class Array<E> {//generic type java 1.5
     }
 
     public void set(int index, E val) {
-        if(index < 0 || index > size)
-            throw new IllegalArgumentException("Invalid access, index out of range");
+        rangeCheck(index);
 
         data[index] = val;
     }
@@ -118,8 +126,7 @@ public class Array<E> {//generic type java 1.5
     }
 
     public E delete(int index) {
-        if(index < 0 || index > size)
-            throw new IllegalArgumentException("Invalid access, index out of range");
+        rangeCheck(index);
 
         E ret = data[index];
 
@@ -176,9 +183,47 @@ public class Array<E> {//generic type java 1.5
         return sb.toString();
     }
 
+    //Assignment # 1: Bonus
+    //1.1) swap(i, j)
+    //1.2) reverse()
+
+    /**
+     * Reverse the order of stored elements
+     */
+    public void reverse() {
+       if(isEmpty()) return;
+       int i = 0, j = size - 1;
+       while(i < j) {
+           swap(i++, j--);
+       }
+    }
+
     public void swap(int i, int j) {
+        if(i == j) return;
+
         E tmp = data[i];
         data[i] = data[j];
         data[j] = tmp;
+    }
+
+    //bonus: quicksort
+    public void sort(Comparator<? super E> c) {
+        if(isEmpty()) return;
+
+        quickSort(data, 0, size - 1, c);
+    }
+
+    private void quickSort(E[] a, int start, int end, Comparator<? super E> c) {
+        int l = start, r = end;
+        final E pivot = a[l + (r - l) / 2];
+        while(l <= r) {
+            while(l <= r && c.compare(a[l], pivot) < 0) l++;
+            while(l <= r && c.compare(a[r], pivot) > 0) r--;
+
+            if(l <= r) swap(l++, r--);
+        }
+
+        if(start < r) quickSort(a, start, r, c);
+        if(l < end) quickSort(a, l, end, c);
     }
 }

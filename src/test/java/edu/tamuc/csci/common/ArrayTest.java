@@ -5,9 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayTest {
+
+    public static final int MAX = 1000000;
 
     @BeforeEach
     void setUp() {
@@ -38,5 +44,30 @@ class ArrayTest {
         arr.append('c');
 
         assertEquals(3, arr.size());
+    }
+
+    @Test
+    @DisplayName("Test bonus")
+    void testBonus() {
+        Array<Integer> arr = new Array<>();
+        //test reverse
+//        for(int i = 3; i <= 10; i++) arr.append(i);
+//        System.out.println(arr);
+//
+//        arr.reverse();
+//        System.out.println(arr);
+
+        //test sort
+        Random random = new Random();
+
+        for(int i = 0; i < MAX; i++) arr.append(random.nextInt(Integer.MAX_VALUE));
+        long start = System.currentTimeMillis();
+        arr.sort(Integer::compareTo);
+        long elapsed = System.currentTimeMillis() - start;
+        System.out.println("Sorting " + MAX + " elements use: " + elapsed + "ms");
+
+        for(int i = 0; i < MAX - 1; i++) {
+            assertTrue(arr.get(i) <= arr.get(i + 1));
+        }
     }
 }
