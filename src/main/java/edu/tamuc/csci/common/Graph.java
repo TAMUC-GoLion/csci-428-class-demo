@@ -54,20 +54,21 @@ public class Graph<E> {
 
         final int n = arr.length;
         final int m = arr[0].length;
-        in = new int[V];
+        in = new int[V]; //in[i] -> in degrees for node_i
         graph = new ArrayList[V];
 
         for (int[] edge : arr) {
             if (graph[edge[0]] == null) graph[edge[0]] = new ArrayList<>();
             if (graph[edge[0]].contains(edge[1])) continue;
 
-            graph[edge[0]].add(edge[1]);
-            in[edge[1]]++;
+            graph[edge[0]].add(edge[1]); //add neighbors
+            in[edge[1]]++; //keep track of in degrees
         }
     }
 
 
     //Demo (2) Topology Sort using BFS
+    // 1 -> 3 (2 - 1=> 1), 2 -> 3 (1 - 1=> 0), 4 -> 3
     public List<Integer> topoSort() {
 
         List<Integer> que = new ArrayList<>();
@@ -88,11 +89,29 @@ public class Graph<E> {
             }
         }
 
-        return que;
+        return que; //topog
+    }
+
+    public GraphNode<E> cloneGraphDFS() {
+        return root == null ? null : dfs(root, new HashMap<>());
+    }
+
+    private GraphNode<E> dfs(GraphNode<E> node, Map<GraphNode, GraphNode> cache) {
+        if(cache.containsKey(node)) return cache.get(node);
+
+        GraphNode<E> nodeClone = new GraphNode<>(node.getVal());
+        cache.put(node, nodeClone);
+
+        for(GraphNode<E> neighbor : node.getNeighbors()) {
+            GraphNode<E> neighborClone = dfs(neighbor, cache);
+            nodeClone.getNeighbors().add(neighborClone);
+        }
+
+        return nodeClone;
     }
 
     //Demo (1) Clone graph (BFS)
-    public GraphNode<E> cloneGraph() {
+    public GraphNode<E> cloneGraphBFS() {
         if(root == null) return null;
 
         GraphNode<E> ret = new GraphNode<>(root.getVal());

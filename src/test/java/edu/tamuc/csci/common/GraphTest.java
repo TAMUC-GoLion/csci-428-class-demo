@@ -25,6 +25,8 @@ class GraphTest {
     void testDG() {
         int numV = 10; //10 vertices
         int[][] edges = {{5,8},{3,5},{1,9},{4,5},{0,2},{1,9},{7,8},{4,9}}; //edges <from> ==> <to>
+        // [0, 1, 2, 3, 4, 5, ... 9]
+        // {5, 8} node_5 -> node_8
 
         Graph<Integer> g = new Graph(edges, numV);
         System.out.println(g.toString());
