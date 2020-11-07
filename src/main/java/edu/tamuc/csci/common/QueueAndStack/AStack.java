@@ -1,6 +1,7 @@
-package edu.tamuc.csci.common;
+package edu.tamuc.csci.common.QueueAndStack;
 
 import edu.tamuc.csci.api.Stack;
+import edu.tamuc.csci.common.Basic.Array;
 
 /**
  * @author ruby_

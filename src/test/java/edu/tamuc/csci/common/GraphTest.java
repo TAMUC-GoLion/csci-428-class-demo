@@ -1,5 +1,6 @@
 package edu.tamuc.csci.common;
 
+import edu.tamuc.csci.common.Graph.Graph;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

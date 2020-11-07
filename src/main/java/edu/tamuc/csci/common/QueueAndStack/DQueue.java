@@ -1,4 +1,4 @@
-package edu.tamuc.csci.common;
+package edu.tamuc.csci.common.QueueAndStack;
 
 import edu.tamuc.csci.api.Queue;
 

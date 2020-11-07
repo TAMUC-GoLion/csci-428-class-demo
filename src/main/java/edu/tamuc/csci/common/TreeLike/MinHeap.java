@@ -1,4 +1,6 @@
-package edu.tamuc.csci.common;
+package edu.tamuc.csci.common.TreeLike;
+
+import edu.tamuc.csci.common.Basic.Array;
 
 /**
  * @author ruby_

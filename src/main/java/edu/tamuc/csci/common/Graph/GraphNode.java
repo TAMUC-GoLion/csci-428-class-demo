@@ -1,4 +1,4 @@
-package edu.tamuc.csci.common;
+package edu.tamuc.csci.common.Graph;
 
 import java.util.ArrayList;
 import java.util.List;

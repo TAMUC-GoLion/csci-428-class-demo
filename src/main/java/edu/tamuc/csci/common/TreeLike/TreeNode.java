@@ -1,6 +1,4 @@
-package edu.tamuc.csci.common;
-
-import java.util.List;
+package edu.tamuc.csci.common.TreeLike;
 
 /**
  * Demo: Tree node

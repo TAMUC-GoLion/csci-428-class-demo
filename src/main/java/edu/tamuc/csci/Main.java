@@ -1,11 +1,7 @@
 package edu.tamuc.csci;
 
-import edu.tamuc.csci.api.Stack;
-import edu.tamuc.csci.common.AStack;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author ruby_

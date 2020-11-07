@@ -1,4 +1,4 @@
-package edu.tamuc.csci.common;
+package edu.tamuc.csci.common.Basic;
 
 import java.util.Arrays;
 import java.util.Comparator;
