@@ -65,7 +65,7 @@ public class BST<E extends Comparable<E>> {
     }
 
     //Goal (2) Traversal
-    //(2.1) levelOrder for serialization purpose (drawing)
+    //(2.1) levelOrder for serialization
     private String levelOrder() {
         if (root == null) return "";
 
@@ -92,38 +92,63 @@ public class BST<E extends Comparable<E>> {
     }
 
     //(2.2) Preorder, Inorder, PostOrder
+    @Deprecated
+    public List<E> preorderRec() { //recursively preorder
+        List<E> ret = new ArrayList<>();
+        preorderRec(root, ret);
+        return ret;
+    }
+
     public List<E> preorder() {
         List<E> ret = new ArrayList<>();
         preorder(root, ret);
         return ret;
     }
 
-    private void preorder(Node<E> node, List<E> res) {
+    @Deprecated
+    private void preorderRec(Node<E> node, List<E> res) {
         if (node == null) return;
 
         res.add(node.val);
-        preorder(node.lChild, res);
-        preorder(node.rChild, res);
+        preorderRec(node.lChild, res);
+        preorderRec(node.rChild, res);
+    }
+
+    private void preorder(Node<E> node, List<E> res) {
+        if(node == null) return;
+
+        Node<E> iter;
+        Stack<Node<E>> stack = new Stack<>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            iter = stack.pop();
+            res.add(iter.val);
+
+            if(iter.rChild != null) stack.push(iter.rChild);
+            if(iter.lChild != null) stack.push(iter.lChild); //last in first out
+        }
     }
 
     public List<E> inorder() {
         List<E> ret = new ArrayList<>();
-        //inorder(root, ret);
-        inorderIter(root, ret);
+        // inorderRec(root, ret); //recursively
+        inorder(root, ret); //iteratively
         return ret;
     }
 
     //Recursive inorder
-    private void inorder(Node<E> node, List<E> res) {
-        if (node == null) return;
+    @Deprecated
+    private void inorderRec(Node<E> node, List<E> res) {
+        if (node == null) return; //exit point
 
-        inorder(node.lChild, res);
-        res.add(node.val);
-        inorder(node.rChild, res);
+        inorderRec(node.lChild, res);
+        res.add(node.val); //visit the node
+        inorderRec(node.rChild, res);
     }
 
     //Iterative inorder
-    private void inorderIter(Node<E> node, List<E> res) {
+    private void inorder(Node<E> node, List<E> res) {
         Stack<Node<E>> stack = new Stack<>();
         Node<E> iter = node;
 
@@ -137,6 +162,55 @@ public class BST<E extends Comparable<E>> {
             res.add(cur.val);
 
             iter = cur.rChild;
+        }
+    }
+
+    //todo: Impl postorder recursively
+    public List<E> postOrder() {
+        List<E> ret = new ArrayList<>();
+        postOrder(root, ret);
+        return ret;
+    }
+
+    @Deprecated
+    public List<E> postOrderRec() {
+        List<E> ret = new ArrayList<>();
+        postOrderRec(root, ret);
+        return ret;
+    }
+
+    @Deprecated
+    private void postOrderRec(Node<E> node, List<E> res) {
+        if(node == null) return;
+
+        postOrderRec(node.lChild, res);
+        postOrderRec(node.rChild, res);
+        res.add(node.val);
+    }
+
+    private void postOrder(Node<E> node, List<E> res) {
+        if (node == null) return;
+        Node<E> cur = node;
+        Node<E> pre = null;
+        Stack<Node<E>> stack = new Stack<>();
+
+        while (cur != null || !stack.isEmpty()) {
+
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.lChild;
+            }
+
+            if (!stack.isEmpty()) {
+                cur = stack.peek();
+
+                boolean isBacked = cur.rChild == pre;
+                pre = cur;
+                if (cur.rChild == null || isBacked) {
+                    res.add(stack.pop().val);
+                    cur = null;
+                } else cur = cur.rChild;
+            }
         }
     }
 
@@ -159,11 +233,7 @@ public class BST<E extends Comparable<E>> {
         return cur;
     }
 
-    /**
-     * Delete the minimum node in the BST, returns its value
-     *
-     * @return
-     */
+    // Delete the minimum node in the BST, returns its value
     public E deleteMin() {
         Node<E> min = min(root);
         root = deleteMin(root);
@@ -192,16 +262,16 @@ public class BST<E extends Comparable<E>> {
         return cur;
     }
 
-    //(3.2) max, removeMax
+    //(3.2) todo: max, removeMax
 
     //Goal (4) Remove
-    // 从二分搜索树中删除元素为e的节点
+    // Delete value e from entire subtree (if its in the tree)
     public void remove(E e) {
         root = remove(root, e);
     }
 
     /**
-     * Recursively delete value {@code e} in a (sub)-tree root at {@code node}
+     * Recursively delete value {@code target} in a (sub)-tree root at {@code node}
      * returns the new root
      */
     private Node<E> remove(Node<E> node, E target) {
@@ -225,7 +295,7 @@ public class BST<E extends Comparable<E>> {
                 return rightNode;
             }
 
-            // delete node has no right child
+            // case 2: delete node has no right child
             if (node.rChild == null) {
                 Node leftNode = node.lChild;
                 node.lChild = null;
@@ -236,7 +306,7 @@ public class BST<E extends Comparable<E>> {
 
             // Target has both left and right children
             // Find the node to replace its place by the successor in inorder traversal
-            Node successor = min(node.rChild);
+            Node<E> successor = min(node.rChild);
             successor.rChild = deleteMin(node.rChild);
             successor.lChild = node.lChild;
 

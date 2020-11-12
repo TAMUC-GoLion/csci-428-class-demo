@@ -1,6 +1,5 @@
 package edu.tamuc.csci.common.TreeLike;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -12,7 +11,7 @@ class BSTTest {
 
     @Test
     void testInsert() {
-        Random rand = new Random();
+        Random rand = new Random(1);
         for(int i = 0; i < 10; i++) {
             int tmp = rand.nextInt(100);
             System.out.println("Inserting: " + tmp);
@@ -31,11 +30,17 @@ class BSTTest {
             bst.insert(tmp);
         }
 
+        //Verify inorder traversal
         List<Integer> tmp = bst.inorder();
         for(int i = 0; i < tmp.size() - 1; i++) {
-            assertTrue(tmp.get(i) <= tmp.get(i + 1));
+            assertTrue(tmp.get(i) < tmp.get(i + 1));
         }
-        //System.out.println(bst.inorder());
+
+        //Verify preorder traversal iteratively
+        assertEquals(bst.preorderRec(), bst.preorder());
+
+        //Verify postorder traversal iteratively
+        assertEquals(bst.postOrderRec(), bst.postOrder());
     }
 
     @Test
