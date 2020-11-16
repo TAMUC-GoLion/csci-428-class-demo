@@ -6,8 +6,8 @@ import java.util.*;
  * Demo: Binary Search Tree
  */
 
-public class BST<E extends Comparable<E>> {
-    private Node<E> root;
+public class BST<K extends Comparable<K>, V> {
+    private Node root;
     private int size;
 
     public BST() {
@@ -23,42 +23,57 @@ public class BST<E extends Comparable<E>> {
 
     //Goal(1) insert & contains
     //commonly use ==> Search if value in tree, return the node or parent (if insert later)
-    private Node<E> search(E val) {
-        if (root == null || val == null) return null;
+    private Node search(K key) {
+        if (root == null || key == null) return null;
 
-        Node<E> cur = root, predecessor = null;
+        Node cur = root, predecessor = null;
         while (cur != null) {
-            if (val.compareTo(cur.val) == 0) return cur; //if has value, return the node
+            if (key.compareTo(cur.key) == 0) return cur; //if has value, return the node
 
             predecessor = cur;
-            if (val.compareTo(cur.val) < 0) cur = cur.lChild;
+            if (key.compareTo(cur.key) < 0) cur = cur.lChild;
             else cur = cur.rChild;
         }
 
         return predecessor; //o.w. return the predecessor
     }
 
+    //BST Map get
+    public Node getNode(K key) {
+        Node ret = search(key);
+        return ret.key.equals(key) ? ret : null;
+    }
+
+    public V valueOf(Node node) {
+        return node != null ? node.val : null;
+    }
+
+    public void set(K key, V val) {
+        Node node = search(key);
+        if(node != null) node.val = val;
+    }
+
     //(1.1) contains
-    public boolean contains(E val) {
-        Node<E> tmp = search(val);
-        return tmp == null ? val == null : val.equals(tmp.val);
+    public boolean contains(K key) {
+        Node tmp = search(key);
+        return tmp == null ? key == null : key.equals(tmp.key);
     }
 
     //(1.2) insert, returns if the insertion was successful
-    public boolean insert(E val) {
-        if (val == null) return false;
+    public boolean insert(K key, V val) {
+        if (key == null) return false;
 
         if (size == 0) {
-            root = new Node<>(val);
+            root = new Node(key, val);
             size++;
             return true;
         }
 
-        Node<E> tmp = search(val);
-        if (val.equals(tmp.val)) return false; //already contains the value, don't insert
+        Node tmp = search(key);
+        if (key.equals(tmp.key)) return false; //already contains the value, don't insert
 
-        if (val.compareTo(tmp.val) < 0) tmp.lChild = new Node<>(val);
-        else tmp.rChild = new Node<>(val);
+        if (key.compareTo(tmp.key) < 0) tmp.lChild = new Node(key, val);
+        else tmp.rChild = new Node(key, val);
 
         size++;
         return true;
@@ -69,11 +84,11 @@ public class BST<E extends Comparable<E>> {
     private String levelOrder() {
         if (root == null) return "";
 
-        List<Node<E>> que = new ArrayList<>();
+        List<Node> que = new ArrayList<>();
         que.add(root);
         int index = 0;
         while (index < que.size()) {
-            Node<E> cur = que.get(index++);
+            Node cur = que.get(index++);
 
             if (cur == null) continue;
 
@@ -83,9 +98,9 @@ public class BST<E extends Comparable<E>> {
 
         StringBuilder sb = new StringBuilder();
         while (que.get(que.size() - 1) == null) que.remove(que.size() - 1);
-        for (Node<E> node : que) {
+        for (Node node : que) {
             if (node == null) sb.append("#,");
-            else sb.append(node.val + ",");
+            else sb.append(node.key + ",");
         }
 
         return sb.toString();
@@ -93,45 +108,45 @@ public class BST<E extends Comparable<E>> {
 
     //(2.2) Preorder, Inorder, PostOrder
     @Deprecated
-    public List<E> preorderRec() { //recursively preorder
-        List<E> ret = new ArrayList<>();
+    public List<K> preorderRec() { //recursively preorder
+        List<K> ret = new ArrayList<>();
         preorderRec(root, ret);
         return ret;
     }
 
-    public List<E> preorder() {
-        List<E> ret = new ArrayList<>();
+    public List<K> preorder() {
+        List<K> ret = new ArrayList<>();
         preorder(root, ret);
         return ret;
     }
 
     @Deprecated
-    private void preorderRec(Node<E> node, List<E> res) {
+    private void preorderRec(Node node, List<K> res) {
         if (node == null) return;
 
-        res.add(node.val);
+        res.add(node.key);
         preorderRec(node.lChild, res);
         preorderRec(node.rChild, res);
     }
 
-    private void preorder(Node<E> node, List<E> res) {
-        if(node == null) return;
+    private void preorder(Node node, List<K> res) {
+        if (node == null) return;
 
-        Node<E> iter;
-        Stack<Node<E>> stack = new Stack<>();
+        Node iter;
+        Stack<Node> stack = new Stack<>();
         stack.push(node);
 
         while (!stack.isEmpty()) {
             iter = stack.pop();
-            res.add(iter.val);
+            res.add(iter.key);
 
-            if(iter.rChild != null) stack.push(iter.rChild);
-            if(iter.lChild != null) stack.push(iter.lChild); //last in first out
+            if (iter.rChild != null) stack.push(iter.rChild);
+            if (iter.lChild != null) stack.push(iter.lChild); //last in first out
         }
     }
 
-    public List<E> inorder() {
-        List<E> ret = new ArrayList<>();
+    public List<K> inorder() {
+        List<K> ret = new ArrayList<>();
         // inorderRec(root, ret); //recursively
         inorder(root, ret); //iteratively
         return ret;
@@ -139,18 +154,18 @@ public class BST<E extends Comparable<E>> {
 
     //Recursive inorder
     @Deprecated
-    private void inorderRec(Node<E> node, List<E> res) {
+    private void inorderRec(Node node, List<K> res) {
         if (node == null) return; //exit point
 
         inorderRec(node.lChild, res);
-        res.add(node.val); //visit the node
+        res.add(node.key); //visit the node
         inorderRec(node.rChild, res);
     }
 
     //Iterative inorder
-    private void inorder(Node<E> node, List<E> res) {
-        Stack<Node<E>> stack = new Stack<>();
-        Node<E> iter = node;
+    private void inorder(Node node, List<K> res) {
+        Stack<Node> stack = new Stack<>();
+        Node iter = node;
 
         while (iter != null || !stack.isEmpty()) {
             while (iter != null) {
@@ -158,41 +173,41 @@ public class BST<E extends Comparable<E>> {
                 iter = iter.lChild;
             }
 
-            Node<E> cur = stack.pop();
-            res.add(cur.val);
+            Node cur = stack.pop();
+            res.add(cur.key);
 
             iter = cur.rChild;
         }
     }
 
     //todo: Impl postorder recursively
-    public List<E> postOrder() {
-        List<E> ret = new ArrayList<>();
+    public List<K> postOrder() {
+        List<K> ret = new ArrayList<>();
         postOrder(root, ret);
         return ret;
     }
 
     @Deprecated
-    public List<E> postOrderRec() {
-        List<E> ret = new ArrayList<>();
+    public List<K> postOrderRec() {
+        List<K> ret = new ArrayList<>();
         postOrderRec(root, ret);
         return ret;
     }
 
     @Deprecated
-    private void postOrderRec(Node<E> node, List<E> res) {
-        if(node == null) return;
+    private void postOrderRec(Node node, List<K> res) {
+        if (node == null) return;
 
         postOrderRec(node.lChild, res);
         postOrderRec(node.rChild, res);
-        res.add(node.val);
+        res.add(node.key);
     }
 
-    private void postOrder(Node<E> node, List<E> res) {
+    private void postOrder(Node node, List<K> res) {
         if (node == null) return;
-        Node<E> cur = node;
-        Node<E> pre = null;
-        Stack<Node<E>> stack = new Stack<>();
+        Node cur = node;
+        Node pre = null;
+        Stack<Node> stack = new Stack<>();
 
         while (cur != null || !stack.isEmpty()) {
 
@@ -207,7 +222,7 @@ public class BST<E extends Comparable<E>> {
                 boolean isBacked = cur.rChild == pre;
                 pre = cur;
                 if (cur.rChild == null || isBacked) {
-                    res.add(stack.pop().val);
+                    res.add(stack.pop().key);
                     cur = null;
                 } else cur = cur.rChild;
             }
@@ -216,9 +231,9 @@ public class BST<E extends Comparable<E>> {
 
     //Goal (3) Search
     //(3.1) min, removeMin
-    public E min() {
+    public K min() {
         if (size == 0) throw new IllegalArgumentException("BST is empty");
-        return min(root).val;
+        return min(root).key;
     }
 
     /**
@@ -227,17 +242,17 @@ public class BST<E extends Comparable<E>> {
      * @param node
      * @return
      */
-    public Node<E> min(Node<E> node) {
-        Node<E> cur = node;
+    public Node min(Node node) {
+        Node cur = node;
         while (cur.lChild != null) cur = cur.lChild;
         return cur;
     }
 
     // Delete the minimum node in the BST, returns its value
-    public E deleteMin() {
-        Node<E> min = min(root);
+    public K deleteMin() {
+        Node min = min(root);
         root = deleteMin(root);
-        return min.val;
+        return min.key;
     }
 
     /**
@@ -246,12 +261,12 @@ public class BST<E extends Comparable<E>> {
      * @param node
      * @return
      */
-    private Node<E> deleteMin(Node<E> node) {
-        Node<E> cur = node;
+    private Node deleteMin(Node node) {
+        Node cur = node;
 
         if (cur.lChild != null) cur.lChild = deleteMin(cur.lChild);
         else {
-            Node<E> right = cur.rChild;
+            Node right = cur.rChild;
 
             cur.rChild = null; //help GC
             size--;
@@ -266,23 +281,23 @@ public class BST<E extends Comparable<E>> {
 
     //Goal (4) Remove
     // Delete value e from entire subtree (if its in the tree)
-    public void remove(E e) {
-        root = remove(root, e);
+    public void remove(K key) {
+        root = remove(root, key);
     }
 
     /**
      * Recursively delete value {@code target} in a (sub)-tree root at {@code node}
      * returns the new root
      */
-    private Node<E> remove(Node<E> node, E target) {
+    private Node remove(Node node, K target) {
 
         if (node == null)
             return null;
 
-        if (target.compareTo(node.val) < 0) {
+        if (target.compareTo(node.key) < 0) {
             node.lChild = remove(node.lChild, target);
             return node;
-        } else if (target.compareTo(node.val) > 0) {
+        } else if (target.compareTo(node.key) > 0) {
             node.rChild = remove(node.rChild, target);
             return node;
         } else {   // node.val == target
@@ -306,7 +321,7 @@ public class BST<E extends Comparable<E>> {
 
             // Target has both left and right children
             // Find the node to replace its place by the successor in inorder traversal
-            Node<E> successor = min(node.rChild);
+            Node successor = min(node.rChild);
             successor.rChild = deleteMin(node.rChild);
             successor.lChild = node.lChild;
 
@@ -317,11 +332,13 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-    private class Node<E> {
-        E val;
-        Node<E> lChild, rChild;
+    private class Node {
+        K key;
+        V val;
+        Node lChild, rChild;
 
-        Node(E val) {
+        Node(K key, V val) {
+            this.key = key;
             this.val = val;
         }
     }

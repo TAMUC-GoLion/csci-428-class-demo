@@ -7,7 +7,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BSTTest {
-    BST<Integer> bst = new BST();
+    BST<Integer, Integer> bst = new BST();
 
     @Test
     void testInsert() {
@@ -15,7 +15,7 @@ class BSTTest {
         for(int i = 0; i < 10; i++) {
             int tmp = rand.nextInt(100);
             System.out.println("Inserting: " + tmp);
-            bst.insert(tmp);
+            bst.insert(tmp, tmp);
         }
 
         System.out.println(bst);
@@ -27,7 +27,7 @@ class BSTTest {
         for(int i = 0; i < 1000000; i++) {
             int tmp = rand.nextInt(Integer.MAX_VALUE);
             // System.out.println("Inserting: " + tmp);
-            bst.insert(tmp);
+            bst.insert(tmp, tmp);
         }
 
         //Verify inorder traversal
@@ -48,7 +48,7 @@ class BSTTest {
         Random rand = new Random();
         for(int i = 0; i < 1000000; i++) {
             int tmp = rand.nextInt(Integer.MAX_VALUE);
-            bst.insert(tmp);
+            bst.insert(tmp, tmp);
         }
 
         List<Integer> tmp  = bst.inorder();
@@ -69,7 +69,7 @@ class BSTTest {
             int tmp = rand.nextInt(100);
             pool.add(tmp);
             System.out.println("Inserting: " + tmp);
-            bst.insert(tmp);
+            bst.insert(tmp, tmp);
         }
 
         //verify the tree
