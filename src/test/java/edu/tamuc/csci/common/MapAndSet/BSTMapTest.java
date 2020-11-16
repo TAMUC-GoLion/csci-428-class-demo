@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BSTMapTest {
 
     @Test
@@ -20,9 +18,9 @@ class BSTMapTest {
             BSTMap<String, Integer> map = new BSTMap<>();
             for (String word : words) {
                 if (map.contains(word))
-                    map.set(word, map.get(word) + 1);
+                    map.put(word, map.get(word) + 1);
                 else
-                    map.add(word, 1);
+                    map.put(word, 1);
             }
 
             System.out.println("Total different words: " + map.getSize());

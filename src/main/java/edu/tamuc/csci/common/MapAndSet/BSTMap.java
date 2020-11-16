@@ -11,8 +11,9 @@ public class BSTMap<K extends  Comparable<K>, V> implements Map<K, V> {
     BST<K, V> bst = new BST<>();
 
     @Override
-    public void add(K key, V value) {
-        bst.insert(key, value);
+    public void put(K key, V value) {
+        if(bst.contains(key)) bst.set(key, value);
+        else bst.insert(key, value);
     }
 
     @Override
@@ -23,11 +24,6 @@ public class BSTMap<K extends  Comparable<K>, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         return bst.valueOf(bst.getNode(key));
-    }
-
-    @Override
-    public void set(K key, V value) {
-        bst.set(key, value);
     }
 
     @Override
