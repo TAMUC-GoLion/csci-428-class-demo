@@ -37,7 +37,7 @@ class HashMapTest {
         // Test HashMap
         startTime = System.currentTimeMillis();
 
-        HashMap<String, Integer> hashMap = new HashMap<>(12289); //todo: change the init capacity, can you figure out a way to make our customized hash table more efficient?
+        HashMap<String, Integer> hashMap = new HashMap<>(53); //todo: change the init capacity, can you figure out a way to make our customized hash table more efficient?
         for (String word : words) {
             if (hashMap.contains(word))
                 hashMap.put(word, hashMap.get(word) + 1);

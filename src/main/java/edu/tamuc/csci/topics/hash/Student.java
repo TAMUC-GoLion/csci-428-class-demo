@@ -21,10 +21,11 @@ public class Student {
     public int hashCode() {
         int hash = 0;
         final int BASE = 53;
-        hash = hash * BASE + id;
+        hash = hash * BASE + id; //KMP % M String Pattern Match id * 53^3 + cid * 53^2 + last * 53^1 + first * 1
         hash = hash * BASE + cid;
         hash = hash * BASE + lastName.hashCode();
         hash = hash * BASE + firstName.hashCode();
+//        hash = id + cid;
         return hash;
     }
 
@@ -44,13 +45,16 @@ public class Student {
         Student s1 = new Student("Li", "Luke", 0, 428);
         Student s2 = new Student("Tom", "Jerry", 1, 428);
         Student s3 = new Student("Tom", "Jerry", 1, 428);
+        Student s4 = new Student("Tom", "Bob", 2, 427);
 
         System.out.println(s1);
         System.out.println(s2);
         System.out.println(s3);
+        System.out.println(s4);
 
         System.out.println(s1.hashCode());
         System.out.println(s2.hashCode());
         System.out.println(s3.hashCode());
+        System.out.println(s4.hashCode());
     }
 }

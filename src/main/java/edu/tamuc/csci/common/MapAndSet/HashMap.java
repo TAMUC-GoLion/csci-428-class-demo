@@ -20,7 +20,7 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    private int hash(K key) {
+    private int hash(K key) {//0x0111...1 <- 31 1's
         return (key.hashCode() & 0x7fffffff) % capacity;
     }
 
