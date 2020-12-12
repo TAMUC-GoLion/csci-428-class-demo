@@ -13,6 +13,7 @@ public class Knapsack {
         if (m <= 0 || A == null || A.length < 1) return 0;
 
         //dp[i][j]: when select i items (i ~[0, A.length], can/can not reach j weight capacity (j ~[0, m])
+        //dp[3][9] ==> select 3 items can I reach the size of 9? ==> yes
         boolean[][] dp = new boolean[A.length + 1][m + 1];
 
         //init

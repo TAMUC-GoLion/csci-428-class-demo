@@ -1,7 +1,15 @@
 package edu.tamuc.csci.topics.hash;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Demo on hashcode
+ * Keep this in mind:
+ * 1) If using raw type as key in map, remember to override both methods hashCode() & equals()
+ * 2) Avoid using Double or Float as key in map!
  */
 
 public class Student {
@@ -56,5 +64,18 @@ public class Student {
         System.out.println(s2.hashCode());
         System.out.println(s3.hashCode());
         System.out.println(s4.hashCode());
+
+        //int , float, double, boolean
+        List<Object> holder = new ArrayList<>();
+        Map<Student, Integer> cls = new HashMap<>();
+        cls.put(s1, 1);
+        cls.put(s2, 5);
+        cls.put(s3, 6);
+        for(Map.Entry<Student, Integer> entry : cls.entrySet()) {
+            holder.add(entry.getKey());
+            System.out.println(entry.getKey() + " 's rank is " + entry.getValue());
+        }
+
+        //flating 1.5 == 3 / 2 ==> 1.49999999999.. (double, floating) xxx. xxxx
     }
 }

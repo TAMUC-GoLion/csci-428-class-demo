@@ -1,6 +1,6 @@
 package edu.tamuc.csci.common;
 
-import edu.tamuc.csci.common.QueueAndStack.BQueue;
+import edu.tamuc.csci.common.queueandstack.BQueue;
 import org.junit.jupiter.api.Test;
 
 class BQueueTest {

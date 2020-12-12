@@ -1,6 +1,6 @@
 package edu.tamuc.csci.common;
 
-import edu.tamuc.csci.common.TreeLike.MinHeap;
+import edu.tamuc.csci.common.treelike.MinHeap;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;

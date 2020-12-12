@@ -1,6 +1,6 @@
 package edu.tamuc.csci.common;
 
-import edu.tamuc.csci.common.Basic.Array;
+import edu.tamuc.csci.common.basic.Array;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

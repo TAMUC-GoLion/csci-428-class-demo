@@ -1,6 +1,6 @@
 package edu.tamuc.csci.common;
 
-import edu.tamuc.csci.common.Basic.LinkedList;
+import edu.tamuc.csci.common.basic.LinkedList;
 import org.junit.jupiter.api.Test;
 
 class LinkedListTest {
